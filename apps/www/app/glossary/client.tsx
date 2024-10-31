@@ -121,7 +121,7 @@ export function GlossaryClient() {
             </h2>
             <FilterableCommand
               placeholder="Search"
-              className="rounded-lg mb-4 border-[.75px] border-white/20 lg:w-[232px]"
+              className="rounded-lg mb-4 border-[.75px] border-white/20"
               terms={allGlossaries}
             />
           </div>

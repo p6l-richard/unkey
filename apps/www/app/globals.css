@@ -533,3 +533,16 @@ li>p {
   background-size: 600px 600px;
   background-repeat: no-repeat;
 }
+
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 6%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 10%;
+    --sidebar-ring: 0 0% 20%;
+  }
+}
