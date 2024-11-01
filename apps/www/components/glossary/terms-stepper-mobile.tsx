@@ -20,24 +20,24 @@ export default function TermsStepperMobile({
   const nextTerm = sortedTerms[(startIndex + 1) % sortedTerms.length];
 
   return (
-    <div className={cn("space-y-4", className)}>
+    <div className={cn("space-y-2", className)}>
       <div className="flex flex-col h-full justify-between content-between">
-        <div className="grid grid-cols-3 gap-4 pb-6">
+        <div className="grid grid-cols-3 gap-4 lg:pb-6">
           <Link
             href={`/glossary/${previousTerm.slug}`}
-            className="flex w-full flex-row items-center gap-2 rounded-lg p-4 text-sm transition-colors text-white/60 hover:text-white"
+            className="flex w-full flex-row items-center md:gap-2 rounded-lg px-4 lg:p-4 text-xs md:text-sm transition-colors text-white/60 hover:text-white"
           >
             <ChevronLeftIcon className="size-4 shrink-0" />
             {previousTerm.title}
           </Link>
 
-          <div className="text-center py-4">
+          <div className="text-center px-4 lg:py-4 text-sm md:text-base">
             <p className="font-medium">{currentTerm.title}</p>
           </div>
 
           <Link
             href={`/glossary/${nextTerm.slug}`}
-            className="flex w-full flex-row items-center gap-2 rounded-lg p-4 text-sm transition-colors text-white/60 hover:text-white"
+            className="flex w-full flex-row items-center md:gap-2 rounded-lg px-4 lg:p-4 text-xs md:text-sm transition-colors text-white/60 hover:text-white"
           >
             {nextTerm.title}
             <ChevronRightIcon className="size-4 shrink-0" />

@@ -42,7 +42,7 @@ export default function Takeaways(props: Pick<Glossary, "term" | "takeaways">) {
     <Card className="w-full bg-white/5 shadow-[0_0_10px_rgba(255,255,255,0.1)] rounded-xl overflow-hidden relative border-white/20">
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/20" />
       <CardHeader className="border-white/20">
-        <CardTitle className="text-2xl font-bold text-white">{props.term}: Key Takeaways</CardTitle>
+        <CardTitle className="text-xl md:text-2xl font-bold text-white">{props.term}: Key Takeaways</CardTitle>
       </CardHeader>
       <CardContent className="space-y-8 p-6">
         <div className="bg-white/10 p-4 rounded-md">
@@ -119,9 +119,9 @@ export default function Takeaways(props: Pick<Glossary, "term" | "takeaways">) {
       </CardContent>
       <CardFooter className="border-t text-xs border-white/10">
         <div className="grid grid-cols-[auto_1fr_auto] gap-4 items-center w-full mt-6">
-          <div className="flex items-center">
+          <div className="flex md:items-center flex-col md:flex-row items-start gap-2">
             <Coffee className="size-5 text-white/80" />
-            <span className="font-semibold text-white ml-2">Did You Know?</span>
+            <span className="font-semibold text-white">Did You Know?</span>
           </div>
           <span className="text-white/60">{props.takeaways.didYouKnow}</span>
           <RefreshCcw className="h-4 w-4 text-white/60 cursor-pointer" />
