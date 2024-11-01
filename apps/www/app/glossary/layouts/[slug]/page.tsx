@@ -9,12 +9,14 @@ import { MeteorLinesAngular } from "@/components/ui/meteorLines";
 //   BreadcrumbList,
 //   BreadcrumbPage,
 // } from "@/components/ui/breadcrumb"
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { FAQ } from "../../[slug]/faq";
 import Takeaways from "../../[slug]/takeaways";
 import { allGlossaries } from "@/.content-collections/generated";
 import { notFound } from "next/navigation";
+import { SidebarTriggerRight } from "./sidebar-trigger-right";
+import SidebarProviderCustom from "./sidebar-provider-custom";
 import { Separator } from "@/components/ui/separator";
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -81,13 +83,12 @@ export default function Page({ params }: { params: { slug: string } }) {
         />
       </div>
       <div className="container flex flex-wrap lg:mt-20 text-white/60">
-        <SidebarProvider>
+        <SidebarProviderCustom className="md:pt-16 lg:pt-0">
           <SidebarLeft />
-          <SidebarInset className="px-4">
-            <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 bg-background">
-              <div className="flex flex-1 gap-8 lg:px-4 justify-start">
-          <SidebarTrigger className="size-8"/>
-                <Separator orientation="vertical" className="h-[0.125rem] lg:hidden" />
+          <Separator orientation="horizontal" className="block lg:hidden bg-sidebar-border md:my-8 my-2" />
+          <SidebarInset className="lg:px-8">
+            <header className="sticky top-0 flex shrink-0 items-center gap-2 bg-background">
+              <div className="flex flex-1 gap-8 lg:px-4 justify-between">
                 {/* <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
@@ -109,19 +110,19 @@ export default function Page({ params }: { params: { slug: string } }) {
               </Breadcrumb> */}
               </div>
             </header>
-            <div className="flex flex-1 flex-col gap-4 py-4 lg:py-0 mt-8 lg:mt-0">
-              <div className="mt-12 sm:mx-4 h-24 w-full rounded-xl bg-muted/50">
-                <h1 className="not-prose blog-heading-gradient text-left font-medium tracking-tight text-4xl">
+            <div className="flex flex-1 flex-col md:gap-4 gap-2">
+              <div className="lg:mt-12 mt-6 lg:mx-4 h-24 w-full rounded-xl bg-muted/50">
+                <h1 className="not-prose blog-heading-gradient text-left font-medium tracking-tight md:text-4xl text-3xl whitespace-break-spaces">
                   What are MIME Types? Format IDs Explained{" "}
                 </h1>
               </div>
-              <div className="mt-12 sm:mx-4">
+              <div className="md:mt-6 lg:mt-12 lg:mx-4">
                 <Takeaways takeaways={term.takeaways} term={term.term} />
               </div>
-              <div className="mt-12 prose-sm md:prose-md text-white/60 sm:mx-4 prose-strong:text-white/90 prose-code:text-white/80 prose-code:bg-white/10 prose-code:px-2 prose-code:py-1 prose-code:border-white/20 prose-code:rounded-md prose-pre:p-0 prose-pre:m-0 prose-pre:leading-6">
+              <div className="mt-12 prose-sm md:prose-md text-white/60 lg:mx-4 prose-strong:text-white/90 prose-code:text-white/80 prose-code:bg-white/10 prose-code:px-2 prose-code:py-1 prose-code:border-white/20 prose-code:rounded-md prose-pre:p-0 prose-pre:m-0 prose-pre:leading-6">
                 <MDX code={term.mdx} />
               </div>
-              <div className="mt-12 sm:mx-4">
+              <div className="mt-12 lg:mx-4">
                 <FAQ
                   items={[
                     {
@@ -148,8 +149,11 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
             </div>
           </SidebarInset>
-          <SidebarRight />
-        </SidebarProvider>
+          <div className="relative">
+            <SidebarTriggerRight className="" />
+            <SidebarRight />
+          </div>
+        </SidebarProviderCustom>
       </div>
     </>
   );

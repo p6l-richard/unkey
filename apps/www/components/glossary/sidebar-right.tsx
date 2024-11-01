@@ -15,14 +15,19 @@ import {
   SidebarMenuItem,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  SidebarRail,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
-      className="sticky hidden lg:flex top-0 h-svh pl-8"
+      className={cn("lg:flex pl-4 group-data-[side=right]:border-l-0", 
+        // these custom styles ensure that we don't destroy the collapsible effect of the sidebarrail with the sticky position -- we apply it only when expanded
+        // at the same time, we have to apply top-36 whenever the state is collapsed so that it doesn't span to the whole page height
+        "group-data-[state=collapsed]:lg:top-36 group-data-[state=expanded]:sticky group-data-[state=expanded]:top-0 group-data-[state=expanded]:h-svh")  }
       side="right"
-      collapsible="none"
+      // variant="inset"
       {...props}
     >
       <SidebarHeader className="h-16 border-b border-sidebar-border">
@@ -75,6 +80,7 @@ export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>)
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
+      <SidebarRail className="after:bg-sidebar-ring"/>
     </Sidebar>
   );
 }
