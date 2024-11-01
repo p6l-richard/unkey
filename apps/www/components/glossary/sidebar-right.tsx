@@ -80,7 +80,7 @@ export function SidebarRight({ ...props }: React.ComponentProps<typeof Sidebar>)
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-      <SidebarRail className="after:bg-sidebar-ring"/>
+      <SidebarRail className="after:bg-sidebar-border hover:after:bg-black"/>
     </Sidebar>
   );
 }
