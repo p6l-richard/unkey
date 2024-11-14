@@ -1,0 +1,93 @@
+---
+title: "API Gateways: Comprehensive Guide"
+description: Unlock the power of API gateways. Learn essentials, key takeaways from popular products, and the role of API gateways in microservices. Dive in today.
+h1: "API Gateways: Essentials, Products & Use Cases"
+term: API gateways
+categories: []
+takeaways:
+  tldr: API gateways are intermediary servers that manage API calls between clients and backend services, providing functionalities like request routing, API composition, protocol translation, caching, and monitoring.
+  definitionAndStructure:
+    - key: Definition
+      value: An API gateway is a server that acts as an intermediary between clients and backend services. It manages API calls, routes them to the appropriate services, and aggregates responses.
+    - key: Key Functions
+      value: API gateways perform several functions including request routing, API composition, protocol and data translation, caching, and monitoring.
+    - key: Deployment Options
+      value: API gateways can be deployed in cloud, on-premises, or hybrid environments.
+  historicalContext:
+    - key: Introduced
+      value: Est. ~2000s
+    - key: Origin
+      value: Web Services (API gateways)
+    - key: Evolution
+      value: Enterprise API gateways
+  usageInAPIs:
+    tags:
+      - API Management
+      - Microservices
+      - Security
+    description: API gateways are used in API management to handle API calls, route them to the appropriate services, and aggregate responses. They play a crucial role in microservices architecture by centralizing API calls and reducing complexity. API gateways also enhance security by implementing features like authentication, authorization, rate limiting, and encryption.
+  bestPractices:
+    - Use API gateways to centralize and manage API calls, reducing complexity in microservices architecture.
+    - Implement security features in API gateways, including authentication, authorization, rate limiting, and encryption to protect APIs from threats.
+    - Leverage API gateways for monitoring and logging API usage, performance, and errors for optimization.
+  recommendedReading:
+    - url: https://www.ibm.com/cloud/learn/api-gateway
+      title: What is an API Gateway?
+    - url: https://www.redhat.com/en/topics/api/what-is-an-api-gateway
+      title: "API Gateway: Definition, Benefits, and How It Works"
+    - url: https://www.f5.com/services/resources/glossary/api-gateway
+      title: API Gateway
+  didYouKnow: API gateways can translate requests and responses between different formats and protocols, such as from JSON to XML, facilitating communication between different systems.
+---
+# API Gateways: A Comprehensive Overview for Developers
+
+API gateways are critical components in modern application architectures, particularly in microservices environments. They serve as the front door for all API calls, enabling applications to communicate with each other and with external services. This glossary entry delves into the essential aspects of API gateways, including their role in microservices, key features of popular API gateway products, and comparisons with load balancers.
+
+## What is an API Gateway in Microservices?
+
+In a microservices architecture, an API gateway is responsible for request routing, composition, and protocol translation. Each microservice performs a specific function, and the API gateway acts as a centralized entry point to manage and secure these interactions. By directing requests to the appropriate services and composing data responses for clients, the API gateway enhances the efficiency and reliability of the application.
+
+## Key Features of Popular API Gateway Products
+
+When exploring **API gateway products**, developers will find a variety of features that enhance functionality:
+
+- **Load Balancing:** Distributes incoming API traffic across multiple backend services, improving load handling and fault tolerance.
+- **Authentication and Authorization:** Validates API calls by ensuring they have valid credentials and appropriate permissions.
+- **Rate Limiting:** Prevents API abuse by limiting the number of requests a user can make within a specified timeframe.
+- **Caching:** Improves response times by storing copies of frequently accessed data.
+- **API Orchestration:** Facilitates request routing to multiple backend services to create a single, aggregate response.
+
+## API Gateways vs Load Balancers: Key Differences
+
+While both API gateways and load balancers manage network traffic, their core functionalities differ significantly:
+
+- **Purpose:** Load balancers distribute traffic to ensure that no single server is overwhelmed. In contrast, API gateways manage API traffic, route requests, enforce policies, and provide additional functionalities like caching and authentication.
+- **Scope:** Load balancers operate at the network transport layer, while API gateways function at the application layer, handling specific API protocols such as HTTP, HTTPS, and WebSocket.
+
+## Examples of API Gateways in Action
+
+Consider a mobile banking application that utilizes various microservices for functions like balance checks, money transfers, and user authentication. An **API gateway** can effectively manage these requests by directing them to the appropriate services, providing a seamless integration layer that enhances security and improves user experience.
+
+## A Comprehensive List of API Gateways
+
+Here is a list of some widely used **API gateways**:
+
+- **Amazon API Gateway**
+- **Kong**
+- **Apigee**
+- **Microsoft Azure API Management**
+- **Google Cloud Endpoints**
+
+These **popular API gateways** are designed to meet the diverse needs of developers and organizations.
+
+## Exploring Open Source API Gateways
+
+For those interested in flexibility and customization, **open source API gateways** offer significant advantages over proprietary solutions. Notable examples include:
+
+- **Kong:** Built on NGINX, it offers high performance and scalability.
+- **Tyk:** Provides a rich set of features with a focus on API management and analytics.
+- **KrakenD:** Specializes in high-performance API gateway solutions, ideal for microservices architectures.
+
+These open source options are particularly beneficial for organizations looking to tailor their gateway layer to meet specific requirements without the constraints of licensed software.
+
+In summary, understanding **what an API gateway is in microservices** and its various functionalities is essential for developers working with modern application architectures. By leveraging the right **API gateway products**, developers can enhance their applications' performance, security, and scalability.
