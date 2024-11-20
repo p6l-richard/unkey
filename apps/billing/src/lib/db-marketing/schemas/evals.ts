@@ -1,11 +1,11 @@
 import { relations } from "drizzle-orm";
-import { index, int, mysqlEnum, mysqlTable, text, timestamp } from "drizzle-orm/mysql-core";
+import { index, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { entries } from "./entries";
 
-export const evalTypes = ["technical", "seo", "editorial"] as const;
-export type EvalType = (typeof evalTypes)[number];
+export const evalTypes = ["technical", "seo", "editorial", "brand_bias"] as const;
+export type EvalType = typeof evalTypes[number];
 
 export const evals = mysqlTable(
   "evals",
@@ -14,7 +14,7 @@ export const evals = mysqlTable(
     entryId: int("entry_id")
       .notNull()
       .references(() => entries.id),
-    type: mysqlEnum("type", evalTypes).notNull(),
+    type: varchar("type", { enum: evalTypes, length: 255 }),// apparently the max on planetscale is 65535: https://planetscale.com/blog/mysql-data-types-varchar-and-char
     ratings: text("ratings").notNull(), // JSON stringified ratings
     recommendations: text("recommendations").notNull().default("[]"), // Add default empty array
     outline: text("outline").default("[]"), // Add outline field
@@ -68,6 +68,19 @@ export const recommendationsSchema = z.object({
       suggestion: z.string(),
     }),
   ),
+});
+
+// schemas for brand bias evaluation to be used with LLM
+export const brandBiasRatingSchema = z.object({
+  commercialBias: z.number().min(0).max(10),
+  neutralityScore: z.number().min(0).max(10),
+  educationalValue: z.number().min(0).max(10),
+});
+
+export const brandBiasRecommendationSchema = z.object({
+  recommendation: z.enum(['use_current', 'fetch_neutral']),
+  dominantBrands: z.array(z.string()),
+  reasoning: z.string()
 });
 
 // DB schemas

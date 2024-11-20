@@ -81,6 +81,12 @@ export const generateOutlineTask = task({
     }
     console.info(`Step 1/8 - ORGANIC RESULTS: ${organicResults?.length} results`);
 
+    // Add logging to verify sources
+    console.info("Sources used for outline generation:", organicResults.map(r => ({
+      url: r.sourceUrl,
+      position: r.serperOrganicResult?.position
+    })));
+
     // Summarize the markdown content to manage token limits
     const summaries = await Promise.all(
       organicResults?.map(async (result) =>
