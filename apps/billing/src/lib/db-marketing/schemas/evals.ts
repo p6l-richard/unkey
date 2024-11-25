@@ -1,11 +1,11 @@
 import { relations } from "drizzle-orm";
-import { index, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { index, int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { entries } from "./entries";
 
 export const evalTypes = ["technical", "seo", "editorial", "brand_bias"] as const;
-export type EvalType = typeof evalTypes[number];
+export type EvalType = (typeof evalTypes)[number];
 
 export const evals = mysqlTable(
   "evals",
@@ -14,7 +14,7 @@ export const evals = mysqlTable(
     entryId: int("entry_id")
       .notNull()
       .references(() => entries.id),
-    type: varchar("type", { enum: evalTypes, length: 255 }),// apparently the max on planetscale is 65535: https://planetscale.com/blog/mysql-data-types-varchar-and-char
+    type: varchar("type", { enum: evalTypes, length: 512 }), // apparently the max on planetscale is 65535: https://planetscale.com/blog/mysql-data-types-varchar-and-char
     ratings: text("ratings").notNull(), // JSON stringified ratings
     recommendations: text("recommendations").notNull().default("[]"), // Add default empty array
     outline: text("outline").default("[]"), // Add outline field
@@ -78,9 +78,9 @@ export const brandBiasRatingSchema = z.object({
 });
 
 export const brandBiasRecommendationSchema = z.object({
-  recommendation: z.enum(['use_current', 'fetch_neutral']),
+  recommendation: z.enum(["use_current", "fetch_neutral"]),
   dominantBrands: z.array(z.string()),
-  reasoning: z.string()
+  reasoning: z.string(),
 });
 
 // DB schemas

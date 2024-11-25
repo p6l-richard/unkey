@@ -10,7 +10,7 @@ export const serperSearchResponses = mysqlTable(
   "serper_search_responses",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 255 }).notNull(),
+    inputTerm: varchar("input_term", { length: 512 }).notNull(),
     searchParameters: json("search_parameters").notNull(),
     answerBox: json("answer_box"),
     knowledgeGraph: json("knowledge_graph"),
@@ -47,11 +47,11 @@ export const serperOrganicResults = mysqlTable(
     id: int("id").primaryKey().autoincrement(),
     searchResponseId: int("search_response_id").notNull(),
     firecrawlResponseId: int("firecrawl_response_id"),
-    title: varchar("title", { length: 255 }).notNull(),
-    link: varchar("link", { length: 767 }).notNull(),
+    title: varchar("title", { length: 512 }).notNull(),
+    link: varchar("link", { length: 512 }).notNull(),
     snippet: text("snippet").notNull(),
     position: int("position").notNull(),
-    imageUrl: varchar("image_url", { length: 767 }),
+    imageUrl: varchar("image_url", { length: 512 }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
@@ -60,6 +60,10 @@ export const serperOrganicResults = mysqlTable(
     linkIdx: index("link_idx").on(table.link),
   }),
 );
+
+export const serperOrganicResultSchema = createSelectSchema(serperOrganicResults);
+export type SerperOrganicResult = z.infer<typeof serperOrganicResultSchema>;
+
 export const serperOrganicResultsRelations = relations(serperOrganicResults, ({ one, many }) => ({
   searchResponse: one(serperSearchResponses, {
     fields: [serperOrganicResults.searchResponseId],
@@ -83,8 +87,8 @@ export const serperSitelinks = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     organicResultId: int("organic_result_id").notNull(),
-    title: varchar("title", { length: 255 }).notNull(),
-    link: varchar("link", { length: 767 }).notNull(),
+    title: varchar("title", { length: 512 }).notNull(),
+    link: varchar("link", { length: 512 }).notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
@@ -115,11 +119,11 @@ export const serperTopStories = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     searchResponseId: int("search_response_id").notNull(),
-    title: varchar("title", { length: 255 }).notNull(),
-    link: varchar("link", { length: 767 }).notNull(),
-    source: varchar("source", { length: 255 }).notNull(),
-    date: varchar("date", { length: 255 }).notNull(),
-    imageUrl: varchar("image_url", { length: 767 }).notNull(),
+    title: varchar("title", { length: 512 }).notNull(),
+    link: varchar("link", { length: 512 }).notNull(),
+    source: varchar("source", { length: 512 }).notNull(),
+    date: varchar("date", { length: 512 }).notNull(),
+    imageUrl: varchar("image_url", { length: 512 }).notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
@@ -148,10 +152,10 @@ export const serperPeopleAlsoAsk = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     searchResponseId: int("search_response_id").notNull(),
-    question: varchar("question", { length: 255 }).notNull(),
+    question: varchar("question", { length: 512 }).notNull(),
     snippet: text("snippet").notNull(),
-    title: varchar("title", { length: 255 }).notNull(),
-    link: varchar("link", { length: 767 }).notNull(),
+    title: varchar("title", { length: 512 }).notNull(),
+    link: varchar("link", { length: 512 }).notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
@@ -182,7 +186,7 @@ export const serperRelatedSearches = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     searchResponseId: int("search_response_id").notNull(),
-    query: varchar("query", { length: 255 }).notNull(),
+    query: varchar("query", { length: 512 }).notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
