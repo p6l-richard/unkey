@@ -25,6 +25,11 @@ export async function persistSerperResults(args: {
       })
       .$returningId();
 
+    console.info(`[serper] ℹ️ The string variable length for the longest result.link is: ${
+      searchResults.organic.reduce((maxLength, result) => Math.max(maxLength, result.link.length), 0)}
+      Note that pscale supports up to 65,535 characters in a varchar column. 
+      Full link: ${searchResults.organic.reduce((a, b) => a.link.length > b.link.length ? a : b).link}`);
+
     const insertPromises = [
       searchResults.organic &&
         tx.insert(serperOrganicResults).values(
