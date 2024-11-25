@@ -3,7 +3,7 @@ import { defineConfig } from "drizzle-kit";
 export default defineConfig({
   verbose: true,
   schema: "./src/lib/db-marketing/schemas/*.ts",
-  out: "./drizzle",
+  out: "./src/lib/db-marketing/migrations",
   dialect: "mysql",
   dbCredentials: {
     host: process.env.MARKETING_DATABASE_HOST!,
