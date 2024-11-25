@@ -747,7 +747,15 @@
           "notNull": false
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "sections_to_keywords_section_id_keyword_id": {
+          "name": "sections_to_keywords_section_id_keyword_id",
+          "columns": [
+            "section_id",
+            "keyword_id"
+          ]
+        }
+      },
       "indexes": {},
       "foreignKeys": {},
       "uniqueConstraints": {}

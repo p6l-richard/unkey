@@ -11,9 +11,9 @@ export const keywords = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     inputTerm: varchar("input_term", { length: 512 }).notNull(),
-    keyword: varchar("keyword", { length: 512 }).notNull(),
-    source: varchar("source", { length: 512 }).notNull(),
-    sourceUrl: varchar("source_url", { length: 512 }),
+    keyword: varchar("keyword", { length: 255 }).notNull(),
+    source: varchar("source", { length: 255 }).notNull(),
+    sourceUrl: varchar("source_url", { length: 767 }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },

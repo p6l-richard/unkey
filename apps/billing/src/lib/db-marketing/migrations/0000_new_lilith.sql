@@ -104,7 +104,8 @@ CREATE TABLE `sections_to_keywords` (
 	`section_id` int NOT NULL,
 	`keyword_id` int NOT NULL,
 	`created_at` timestamp(3),
-	`updated_at` timestamp(3)
+	`updated_at` timestamp(3),
+	CONSTRAINT `sections_to_keywords_section_id_keyword_id` PRIMARY KEY(`section_id`,`keyword_id`)
 );
 --> statement-breakpoint
 CREATE TABLE `serper_organic_results` (

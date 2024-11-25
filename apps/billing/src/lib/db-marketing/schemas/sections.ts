@@ -18,7 +18,7 @@ export const sections = mysqlTable("sections", {
   entryId: int("entry_id")
     .notNull()
     .references(() => entries.id),
-  heading: varchar("heading", { length: 512 }).notNull(),
+  heading: varchar("heading", { length: 255 }).notNull(),
   description: text("description").notNull(),
   order: int("order").notNull(),
   markdown: text("markdown"),
