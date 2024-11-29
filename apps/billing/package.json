@@ -6,11 +6,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm dlx trigger.dev@3.2.0 dev",
+    "db:push-custom": "pnpm dlx tsx ./scripts/db:push-custom.ts",
     "db:push": "dotenv -e .env drizzle-kit push",
     "db:studio": "dotenv -e .env drizzle-kit studio --verbose",
     "db:generate": "dotenv -e .env drizzle-kit generate",
     "db:migrate": "dotenv -e .env drizzle-kit migrate",
-    "db:pull": "dotenv -e .env drizzle-kit pull"
+    "db:pull": "dotenv -e .env drizzle-kit pull",
+    "db:drop": "dotenv -e .env drizzle-kit drop"
   },
   "keywords": [],
   "author": "Andreas Thomas",
@@ -33,7 +35,7 @@
     "@unkey/resend": "workspace:^",
     "@unkey/schema": "workspace:^",
     "ai": "^3.4.7",
-    "drizzle-orm": "^0.33.0",
+    "drizzle-orm": "^0.36.4",
     "drizzle-zod": "^0.5.1",
     "github-slugger": "^2.0.0",
     "js-yaml": "^4.1.0",
@@ -45,7 +47,7 @@
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
-    "drizzle-kit": "^0.24.2",
+    "drizzle-kit": "^0.28.1",
     "typescript": "^5.5.3"
   }
 }

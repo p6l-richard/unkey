@@ -4,6 +4,7 @@ export default defineConfig({
   verbose: true,
   schema: "./src/schema/index.ts",
   dialect: "mysql",
+  strict: true,
   dbCredentials: {
     url: process.env.DRIZZLE_DATABASE_URL!,
   },

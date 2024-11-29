@@ -5,6 +5,7 @@ export default defineConfig({
   schema: "./src/lib/db-marketing/schemas/*.ts",
   out: "./src/lib/db-marketing/migrations",
   dialect: "mysql",
+  strict: true,
   dbCredentials: {
     host: process.env.MARKETING_DATABASE_HOST!,
     user: process.env.MARKETING_DATABASE_USERNAME!,

@@ -30,7 +30,7 @@ export const entries = mysqlTable(
   "entries",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 512 }).notNull(),
+    inputTerm: varchar("input_term", { length: 768 }).notNull(),
     githubPrUrl: varchar("github_pr_url", { length: 512 }),
     dynamicSectionsContent: text("dynamic_sections_content"),
     metaTitle: varchar("meta_title", { length: 512 }),
