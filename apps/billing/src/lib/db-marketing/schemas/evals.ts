@@ -14,7 +14,7 @@ export const evals = mysqlTable(
     entryId: int("entry_id")
       .notNull()
       .references(() => entries.id),
-    type: varchar("type", { enum: evalTypes, length: 255 }),
+    type: varchar("type", { enum: evalTypes, length: 767 }),
     ratings: text("ratings").notNull(), // JSON stringified ratings
     recommendations: text("recommendations").notNull().default("[]"), // Add default empty array
     outline: text("outline").default("[]"), // Add outline field

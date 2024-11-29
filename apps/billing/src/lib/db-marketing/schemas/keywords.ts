@@ -10,9 +10,9 @@ export const keywords = mysqlTable(
   "keywords",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 512 }).notNull(),
-    keyword: varchar("keyword", { length: 255 }).notNull(),
-    source: varchar("source", { length: 255 }).notNull(),
+    inputTerm: varchar("input_term", { length: 512 }).notNull(), // this hit the 3072 byte ceiling on mysql when using a 767
+    keyword: varchar("keyword", { length: 256 }).notNull(),// this hit the 3072 byte ceiling on mysql when using a 767
+    source: varchar("source", { length: 767 }).notNull(),
     sourceUrl: varchar("source_url", { length: 767 }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
