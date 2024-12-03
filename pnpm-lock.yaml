@@ -168,14 +168,14 @@ importers:
         specifier: ^1.16.0
         version: 1.19.0
       '@trigger.dev/nextjs':
-        specifier: 3.3.1
-        version: 3.3.1(@trigger.dev/sdk@3.3.1)(next@14.2.10)
+        specifier: 3.3.3
+        version: 3.3.3(@trigger.dev/sdk@3.3.3)(next@14.2.10)
       '@trigger.dev/sdk':
-        specifier: 3.3.1
-        version: 3.3.1(zod@3.23.8)
+        specifier: 3.3.3
+        version: 3.3.3(zod@3.23.8)
       '@trigger.dev/slack':
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.3.3
+        version: 3.3.3
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -10886,8 +10886,8 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@trigger.dev/core@3.3.1:
-    resolution: {integrity: sha512-F3jgGtjPDRwvycI9yNR+iLAsMMxranaF/0FOUsUu9r7HER2odBPAmRmh0j8F6Yhsta9aVfwyFm9Hg1xDgX9C5A==}
+  /@trigger.dev/core@3.3.3:
+    resolution: {integrity: sha512-k6HRNOHul1/CTePf0EjgDvYkWO3hSEzZysiFeBPogkJuL2etF4JzlCtjf5ZdVpskvDh4M3S1vh/jTQMSc5Hp5A==}
     engines: {node: '>=18.20.0'}
     dependencies:
       '@electric-sql/client': 0.7.1
@@ -10921,22 +10921,22 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@trigger.dev/nextjs@3.3.1(@trigger.dev/sdk@3.3.1)(next@14.2.10):
-    resolution: {integrity: sha512-TEhdvI/KpyNVVvmtiLfDXpfTLiau52rOG6BthZ8/f+igcW5QDQoIvuygEXSpSV0dNxv4HvM8Dsw5l8e4Hk+qtA==}
+  /@trigger.dev/nextjs@3.3.3(@trigger.dev/sdk@3.3.3)(next@14.2.10):
+    resolution: {integrity: sha512-URwpAw4ZuPVlBKw0jDffnUDf6PSj9HejsdXl1w6u2rpgwGM1gFTOibX70Q581cza/sfIL2GACS1qqI9TnO/ePg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@trigger.dev/sdk': ~2.3.0 || ^3.0.0
       next: '>=12.0.0'
     dependencies:
-      '@trigger.dev/sdk': 3.3.1(zod@3.23.8)
+      '@trigger.dev/sdk': 3.3.3(zod@3.23.8)
       debug: 4.3.7(supports-color@8.1.1)
       next: 14.2.10(@babel/core@7.26.0)(@opentelemetry/api@1.4.1)(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@trigger.dev/sdk@3.3.1(zod@3.22.3):
-    resolution: {integrity: sha512-v8zBuroUGkI1emQvJIFo22K8vkAq5FMuVKipJFRWZff5qSplj3rI2O3LzOARDDnw/lCiAkZFTB2qNsgMEfVXrA==}
+  /@trigger.dev/sdk@3.3.3(zod@3.22.3):
+    resolution: {integrity: sha512-88QnS1/msItmY/5EqzpD3F015a7doSb3TPiltu2yo1NxW5E9zrFv065Qjg61AbetcWA28sjo6KHoZEW2etTVPQ==}
     engines: {node: '>=18.20.0'}
     peerDependencies:
       zod: ^3.0.0
@@ -10944,7 +10944,7 @@ packages:
       '@opentelemetry/api': 1.4.1
       '@opentelemetry/api-logs': 0.52.1
       '@opentelemetry/semantic-conventions': 1.13.0
-      '@trigger.dev/core': 3.3.1
+      '@trigger.dev/core': 3.3.3
       chalk: 5.3.0
       cronstrue: 2.52.0
       debug: 4.3.7(supports-color@8.1.1)
@@ -10961,8 +10961,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@trigger.dev/sdk@3.3.1(zod@3.23.8):
-    resolution: {integrity: sha512-v8zBuroUGkI1emQvJIFo22K8vkAq5FMuVKipJFRWZff5qSplj3rI2O3LzOARDDnw/lCiAkZFTB2qNsgMEfVXrA==}
+  /@trigger.dev/sdk@3.3.3(zod@3.23.8):
+    resolution: {integrity: sha512-88QnS1/msItmY/5EqzpD3F015a7doSb3TPiltu2yo1NxW5E9zrFv065Qjg61AbetcWA28sjo6KHoZEW2etTVPQ==}
     engines: {node: '>=18.20.0'}
     peerDependencies:
       zod: ^3.0.0
@@ -10970,7 +10970,7 @@ packages:
       '@opentelemetry/api': 1.4.1
       '@opentelemetry/api-logs': 0.52.1
       '@opentelemetry/semantic-conventions': 1.13.0
-      '@trigger.dev/core': 3.3.1
+      '@trigger.dev/core': 3.3.3
       chalk: 5.3.0
       cronstrue: 2.52.0
       debug: 4.3.7(supports-color@8.1.1)
@@ -10987,12 +10987,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@trigger.dev/slack@3.3.1:
-    resolution: {integrity: sha512-lNUONvePTqkRCorWZF2LZnCAueUwiPxHglw/+m57uM57gi4k7+VX4Q1PPpLg6HKWVHotrKc2y0WGmq/CYb/bsw==}
+  /@trigger.dev/slack@3.3.3:
+    resolution: {integrity: sha512-9zyIZ3CgifksV4r1WHiYGhfU8OHuIdpsR754CH1DcLjCdnH25IDQttNnU0wYcuo84hp/UkYWn9y+WJZHWw4Jlg==}
     engines: {node: '>=16.8.0'}
     dependencies:
       '@slack/web-api': 6.13.0
-      '@trigger.dev/sdk': 3.3.1(zod@3.22.3)
+      '@trigger.dev/sdk': 3.3.3(zod@3.22.3)
       zod: 3.22.3
     transitivePeerDependencies:
       - bufferutil
