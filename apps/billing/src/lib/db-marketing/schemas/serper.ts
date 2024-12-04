@@ -10,7 +10,8 @@ export const serperSearchResponses = mysqlTable(
   "serper_search_responses",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 767 }).notNull(),
+    inputTermHash: varchar("input_term_hash", { length: 64 }).notNull(),
+    inputTerm: text("input_term").notNull(),
     searchParameters: json("search_parameters").notNull(),
     answerBox: json("answer_box"),
     knowledgeGraph: json("knowledge_graph"),
@@ -18,14 +19,14 @@ export const serperSearchResponses = mysqlTable(
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
   (table) => ({
-    inputTermIdx: index("input_term_idx").on(table.inputTerm),
+    inputTermHashIdx: index("input_term_hash_idx").on(table.inputTermHash),
   }),
 );
 
 export const serperSearchResponsesRelations = relations(serperSearchResponses, ({ one, many }) => ({
   searchQuery: one(searchQueries, {
-    fields: [serperSearchResponses.inputTerm],
-    references: [searchQueries.inputTerm],
+    fields: [serperSearchResponses.inputTermHash],
+    references: [searchQueries.inputTermHash],
   }),
   serperOrganicResults: many(serperOrganicResults),
   serperTopStories: many(serperTopStories),
@@ -48,7 +49,8 @@ export const serperOrganicResults = mysqlTable(
     searchResponseId: int("search_response_id").notNull(),
     firecrawlResponseId: int("firecrawl_response_id"),
     title: varchar("title", { length: 767 }).notNull(),
-    link: varchar("link", { length: 767 }).notNull(),
+    linkHash: varchar("link_hash", { length: 64 }).notNull(),
+    link: text("link").notNull(),
     snippet: text("snippet").notNull(),
     position: int("position").notNull(),
     imageUrl: varchar("image_url", { length: 767 }),
@@ -57,7 +59,7 @@ export const serperOrganicResults = mysqlTable(
   },
   (table) => ({
     searchResponseIdIdx: index("search_response_id_idx").on(table.searchResponseId),
-    linkIdx: index("link_idx").on(table.link),
+    linkHashIdx: index("link_hash_idx").on(table.linkHash),
   }),
 );
 
@@ -71,8 +73,8 @@ export const serperOrganicResultsRelations = relations(serperOrganicResults, ({ 
   }),
   sitelinks: many(serperSitelinks),
   firecrawlResponse: one(firecrawlResponses, {
-    fields: [serperOrganicResults.link],
-    references: [firecrawlResponses.sourceUrl],
+    fields: [serperOrganicResults.linkHash],
+    references: [firecrawlResponses.sourceUrlHash],
   }),
 }));
 

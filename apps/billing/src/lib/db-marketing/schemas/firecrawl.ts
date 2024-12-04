@@ -21,7 +21,8 @@ export const firecrawlResponses = mysqlTable(
     success: boolean("success").notNull(),
     scrapeId: text("scrape_id"),
     markdown: text("markdown"),
-    sourceUrl: varchar("source_url", { length: 767 }).notNull(),
+    sourceUrlHash: varchar("source_url_hash", { length: 64 }).notNull(),
+    sourceUrl: text("source_url").notNull(),
     statusCode: int("status_code"),
     title: varchar("title", { length: 767 }),
     description: text("description"),
@@ -34,24 +35,25 @@ export const firecrawlResponses = mysqlTable(
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").onUpdateNow(),
     error: text("error"),
-    inputTerm: varchar("input_term", { length: 767 }),
+    inputTermHash: varchar("input_term_hash", { length: 64 }),
+    inputTerm: text("input_term"),
     summary: text("summary"),
   },
   (table) => ({
-    sourceUrlIdx: index("source_url_idx").on(table.sourceUrl),
-    uniqueSourceUrl: unique("unique_source_url").on(table.sourceUrl),
-    inputTermIdx: index("input_term_idx").on(table.inputTerm),
+    sourceUrlHashIdx: index("source_url_hash_idx").on(table.sourceUrlHash),
+    uniqueSourceUrlHash: unique("unique_source_url_hash").on(table.sourceUrlHash),
+    inputTermHashIdx: index("input_term_hash_idx").on(table.inputTermHash),
   }),
 );
 
 export const firecrawlResponsesRelations = relations(firecrawlResponses, ({ one }) => ({
   serperOrganicResult: one(serperOrganicResults, {
-    fields: [firecrawlResponses.sourceUrl],
-    references: [serperOrganicResults.link],
+    fields: [firecrawlResponses.sourceUrlHash],
+    references: [serperOrganicResults.linkHash],
   }),
   searchQuery: one(searchQueries, {
-    fields: [firecrawlResponses.inputTerm],
-    references: [searchQueries.inputTerm],
+    fields: [firecrawlResponses.inputTermHash],
+    references: [searchQueries.inputTermHash],
   }),
 }));
 

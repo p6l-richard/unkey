@@ -30,7 +30,8 @@ export const entries = mysqlTable(
   "entries",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 767 }).notNull(),
+    inputTermHash: varchar("input_term_hash", { length: 64 }).notNull(),
+    inputTerm: text("input_term").notNull(),
     githubPrUrl: varchar("github_pr_url", { length: 767 }),
     dynamicSectionsContent: text("dynamic_sections_content"),
     metaTitle: varchar("meta_title", { length: 767 }),
@@ -47,15 +48,17 @@ export const entries = mysqlTable(
       .$onUpdate(() => new Date()),
   },
   (table) => ({
-    inputTermIdx: index("input_term_idx").on(table.inputTerm),
+    inputTermHashIdx: index("input_term_hash_idx").on(table.inputTermHash),
   }),
 );
+
+
 
 export const entriesRelations = relations(entries, ({ many, one }) => ({
   dynamicSections: many(sections),
   searchQuery: one(searchQueries, {
-    fields: [entries.inputTerm],
-    references: [searchQueries.inputTerm],
+    fields: [entries.inputTermHash],
+    references: [searchQueries.inputTermHash],
   }),
 }));
 

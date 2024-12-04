@@ -168,14 +168,14 @@ importers:
         specifier: ^1.16.0
         version: 1.18.0
       '@trigger.dev/nextjs':
-        specifier: 3.2.0
-        version: 3.2.0(@trigger.dev/sdk@3.2.0)(next@14.2.10)
+        specifier: 3.3.5
+        version: 3.3.5(@trigger.dev/sdk@3.3.5)(next@14.2.10)
       '@trigger.dev/sdk':
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.3.5
+        version: 3.3.5(zod@3.23.8)
       '@trigger.dev/slack':
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.3.5
+        version: 3.3.5
       '@unkey/billing':
         specifier: workspace:^
         version: link:../../internal/billing
@@ -3304,6 +3304,12 @@ packages:
 
   /@electric-sql/client@0.6.3:
     resolution: {integrity: sha512-/AYkRrEASKIGcjtNp8IVJ3sAUm+IQ2l0NrGgDvvAG/n1+ifOl7kD1E4dRyg1qdY/b+HdKhGNYlNgsPuwMKO2Mg==}
+    optionalDependencies:
+      '@rollup/rollup-darwin-arm64': 4.27.2
+    dev: false
+
+  /@electric-sql/client@0.7.1:
+    resolution: {integrity: sha512-NpKEn5hDSy+NaAdG9Ql8kIGfjrj/XfakJOOHTTutb99db3Dza0uUfnkqycFpyUAarFMQ4hYSKgx8AbOm1PCeFQ==}
     optionalDependencies:
       '@rollup/rollup-darwin-arm64': 4.27.2
     dev: false
@@ -10265,6 +10271,41 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@trigger.dev/core@3.3.5:
+    resolution: {integrity: sha512-4W0pTup6ZCv/ux8367DJVuRisCaoU9NaG/YtoJqH4p4+NbSZ2v9rbBlcSIyBmf8dh+LJjyXJfjV29k5qBkotTg==}
+    engines: {node: '>=18.20.0'}
+    dependencies:
+      '@electric-sql/client': 0.7.1
+      '@google-cloud/precise-date': 4.0.0
+      '@jsonhero/path': 1.0.21
+      '@opentelemetry/api': 1.4.1
+      '@opentelemetry/api-logs': 0.52.1
+      '@opentelemetry/exporter-logs-otlp-http': 0.52.1(@opentelemetry/api@1.4.1)
+      '@opentelemetry/exporter-trace-otlp-http': 0.52.1(@opentelemetry/api@1.4.1)
+      '@opentelemetry/instrumentation': 0.52.1(@opentelemetry/api@1.4.1)
+      '@opentelemetry/resources': 1.13.0(@opentelemetry/api@1.4.1)
+      '@opentelemetry/sdk-logs': 0.52.1(@opentelemetry/api@1.4.1)
+      '@opentelemetry/sdk-node': 0.52.1(@opentelemetry/api@1.4.1)
+      '@opentelemetry/sdk-trace-base': 1.13.0(@opentelemetry/api@1.4.1)
+      '@opentelemetry/sdk-trace-node': 1.13.0(@opentelemetry/api@1.4.1)
+      '@opentelemetry/semantic-conventions': 1.13.0
+      dequal: 2.0.3
+      eventsource-parser: 3.0.0
+      execa: 8.0.1
+      humanize-duration: 3.32.1
+      jose: 5.9.6
+      nanoid: 3.3.7
+      socket.io-client: 4.7.5
+      superjson: 2.2.1
+      zod: 3.23.8
+      zod-error: 1.5.0
+      zod-validation-error: 1.5.0(zod@3.23.8)
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /@trigger.dev/nextjs@3.2.0(@trigger.dev/sdk@3.2.0)(next@14.2.10):
     resolution: {integrity: sha512-bsHbG0VDCRjp9vncwMIhc2hGgY5Xz0mO3TAEhNFNUT9WQzGQkzVjex06gZlFJv5S4jQorpPvazZCSeZJrW0cyw==}
     engines: {node: '>=18.0.0'}
@@ -10273,6 +10314,20 @@ packages:
       next: '>=12.0.0'
     dependencies:
       '@trigger.dev/sdk': 3.2.0
+      debug: 4.3.7(supports-color@8.1.1)
+      next: 14.2.10(@babel/core@7.26.0)(@opentelemetry/api@1.4.1)(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@trigger.dev/nextjs@3.3.5(@trigger.dev/sdk@3.3.5)(next@14.2.10):
+    resolution: {integrity: sha512-NNwOu3B+mZwN+NZzZKknwHRnHxlE/C8MA3BCpdaCVbEuoFwkJOC1TaZzir3nQofNNj7+xpvQYOM9td4cGPWuBA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@trigger.dev/sdk': ~2.3.0 || ^3.0.0
+      next: '>=12.0.0'
+    dependencies:
+      '@trigger.dev/sdk': 3.3.5(zod@3.23.8)
       debug: 4.3.7(supports-color@8.1.1)
       next: 14.2.10(@babel/core@7.26.0)(@opentelemetry/api@1.4.1)(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
@@ -10303,12 +10358,78 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@trigger.dev/sdk@3.3.5(zod@3.22.3):
+    resolution: {integrity: sha512-K/cdErHVBTn+oR4uX7hlseLHFo7vVzpTfkHFDFW2pzTQAcUs8a4IOcm3y3BrlW1UVdfIijuOSwCyW/PnxtjhUQ==}
+    engines: {node: '>=18.20.0'}
+    peerDependencies:
+      zod: ^3.0.0
+    dependencies:
+      '@opentelemetry/api': 1.4.1
+      '@opentelemetry/api-logs': 0.52.1
+      '@opentelemetry/semantic-conventions': 1.13.0
+      '@trigger.dev/core': 3.3.5
+      chalk: 5.3.0
+      cronstrue: 2.51.0
+      debug: 4.3.7(supports-color@8.1.1)
+      evt: 2.5.7
+      slug: 6.1.0
+      terminal-link: 3.0.0
+      ulid: 2.3.0
+      uuid: 9.0.1
+      ws: 8.18.0
+      zod: 3.22.3
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@trigger.dev/sdk@3.3.5(zod@3.23.8):
+    resolution: {integrity: sha512-K/cdErHVBTn+oR4uX7hlseLHFo7vVzpTfkHFDFW2pzTQAcUs8a4IOcm3y3BrlW1UVdfIijuOSwCyW/PnxtjhUQ==}
+    engines: {node: '>=18.20.0'}
+    peerDependencies:
+      zod: ^3.0.0
+    dependencies:
+      '@opentelemetry/api': 1.4.1
+      '@opentelemetry/api-logs': 0.52.1
+      '@opentelemetry/semantic-conventions': 1.13.0
+      '@trigger.dev/core': 3.3.5
+      chalk: 5.3.0
+      cronstrue: 2.51.0
+      debug: 4.3.7(supports-color@8.1.1)
+      evt: 2.5.7
+      slug: 6.1.0
+      terminal-link: 3.0.0
+      ulid: 2.3.0
+      uuid: 9.0.1
+      ws: 8.18.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: false
+
   /@trigger.dev/slack@3.2.0:
     resolution: {integrity: sha512-eep1YHWXulIOo2tD4nYqQbdenis2ld844yF8TuZhpzw3lvrcZ4uJWmoas9L6IHRR6XbBeKOa1bC7qHsf6uKYVw==}
     engines: {node: '>=16.8.0'}
     dependencies:
       '@slack/web-api': 6.13.0
-      '@trigger.dev/sdk': 3.2.0
+      '@trigger.dev/sdk': 3.3.5(zod@3.22.3)
+      zod: 3.22.3
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@trigger.dev/slack@3.3.5:
+    resolution: {integrity: sha512-nDoKXiQ3eqgDXe8UQq3IqixK25GGrLbQQEAbVA2GGqyqsGNYugpIYb5D59CcU7G75ACx+s5Cl/LlwZZJNIFI6w==}
+    engines: {node: '>=16.8.0'}
+    dependencies:
+      '@slack/web-api': 6.13.0
+      '@trigger.dev/sdk': 3.3.5(zod@3.22.3)
       zod: 3.22.3
     transitivePeerDependencies:
       - bufferutil
@@ -15168,6 +15289,11 @@ packages:
   /eventsource-parser@1.1.2:
     resolution: {integrity: sha512-v0eOBUbiaFojBu2s2NPBfYUoRR9GjcDNvCXVaqEf5vVfpIAh9f8RCo4vXTP8c63QRKCFwoLpMpTdPwwhEKVgzA==}
     engines: {node: '>=14.18'}
+    dev: false
+
+  /eventsource-parser@3.0.0:
+    resolution: {integrity: sha512-T1C0XCUimhxVQzW4zFipdx0SficT651NnkR0ZSH3yQwh+mFMdLfgjABVi4YtMTtaL4s168593DaoaRLMqryavA==}
+    engines: {node: '>=18.0.0'}
     dev: false
 
   /evt@2.5.7:
@@ -25441,6 +25567,15 @@ packages:
       zod: ^3.18.0
     dependencies:
       zod: 3.22.3
+    dev: false
+
+  /zod-validation-error@1.5.0(zod@3.23.8):
+    resolution: {integrity: sha512-/7eFkAI4qV0tcxMBB/3+d2c1P6jzzZYdYSlBuAklzMuCrJu5bzJfHS0yVAS87dRHVlhftd6RFJDIvv03JgkSbw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      zod: ^3.18.0
+    dependencies:
+      zod: 3.23.8
     dev: false
 
   /zod-validation-error@3.4.0(zod@3.23.8):

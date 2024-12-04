@@ -7,6 +7,7 @@ import {
   timestamp,
   unique,
   varchar,
+  text,
 } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
 import type { z } from "zod";
@@ -18,7 +19,8 @@ export const searchQueries = mysqlTable(
   "search_queries",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 767 }).notNull(),
+    inputTermHash: varchar("input_term_hash", { length: 64 }).notNull(),
+    inputTerm: text("input_term").notNull(),
     query: varchar("query", { length: 767 }).notNull(),
     isTermAsQueryAmbiguous: boolean("is_term_as_query_ambiguous").notNull().default(false),
     ambiguityReason: varchar("ambiguity_reason", { length: 767 }).notNull().default(""),
@@ -27,8 +29,8 @@ export const searchQueries = mysqlTable(
     updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
   (table) => ({
-    inputTermIdx: index("input_term_idx").on(table.inputTerm),
-    uniqueInputTerm: unique("search_queries_input_term_unique").on(table.inputTerm),
+    inputTermHashIdx: index("input_term_hash_idx").on(table.inputTermHash),
+    uniqueInputTermHash: unique("search_queries_input_term_hash_unique").on(table.inputTermHash),
   }),
 );
 

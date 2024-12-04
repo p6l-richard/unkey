@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { index, int, mysqlTable, timestamp, unique, varchar } from "drizzle-orm/mysql-core";
+import { index, int, mysqlTable, timestamp, unique, varchar, text } from "drizzle-orm/mysql-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import type { z } from "zod";
 import { searchQueries } from "./searchQuery";
@@ -10,17 +10,20 @@ export const keywords = mysqlTable(
   "keywords",
   {
     id: int("id").primaryKey().autoincrement(),
-    inputTerm: varchar("input_term", { length: 512 }).notNull(), // this hit the 3072 byte ceiling on mysql when using a 767
-    keyword: varchar("keyword", { length: 256 }).notNull(),// this hit the 3072 byte ceiling on mysql when using a 767
+    inputTermHash: varchar("input_term_hash", { length: 64 }).notNull(),
+    inputTerm: text("input_term").notNull(),
+    keywordHash: varchar("keyword_hash", { length: 64 }).notNull(),
+    keyword: text("keyword").notNull(),
     source: varchar("source", { length: 767 }).notNull(),
     sourceUrl: varchar("source_url", { length: 767 }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (table) => ({
-    inputTermIdx: index("input_term_idx").on(table.inputTerm),
+    inputTermHashIdx: index("input_term_hash_idx").on(table.inputTermHash),
+    keywordHashIdx: index("keyword_hash_idx").on(table.keywordHash),
     sourceUrlIdx: index("source_url_idx").on(table.sourceUrl),
-    uniqueKeyword: unique("keywords_input_term_keyword_unique").on(table.inputTerm, table.keyword),
+    uniqueKeyword: unique("keywords_input_term_hash_keyword_hash_unique").on(table.inputTermHash, table.keywordHash),
   }),
 );
 
@@ -31,8 +34,8 @@ export type SelectKeywords = typeof keywords.$inferSelect;
 
 export const keywordsRelations = relations(keywords, ({ one, many }) => ({
   inputTerm: one(searchQueries, {
-    fields: [keywords.inputTerm],
-    references: [searchQueries.inputTerm],
+    fields: [keywords.inputTermHash],
+    references: [searchQueries.inputTermHash],
   }),
   sourceUrl: one(serperOrganicResults, {
     fields: [keywords.sourceUrl],
