@@ -1,0 +1,152 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# MVP Definition Guidelines
+
+## Core Principles
+1. Every change starts with an MVP definition
+2. Keep scope minimal and focused - avoid feature creep
+3. Prefer simple, working implementations over perfect solutions
+4. Use test-driven development
+5. Follow iterative approval process
+
+## Required Sections
+
+Every MVP definition must include:
+
+```markdown
+# MVP Definition: {taskName} v1
+
+## Overview
+```typescript
+// High-level API example showing final implementation
+```
+
+### Tasks
+1. Task 1 Name
+   - Description
+   - Dependencies
+2. Task 2 Name
+   ...
+
+### Implementation Order
+- [ ] Task 1 (depends on: none)
+- [ ] Task 2 (depends on: Task 1)
+...
+
+## Goal
+Clear, single-sentence description of what this MVP aims to achieve.
+
+## Input
+```typescript
+// Define exact input type using TypeScript/Zod
+type Input = {
+  // required fields
+};
+```
+
+## Dependencies and Rules
+
+### External Dependencies
+- List external services/packages
+- Version requirements
+- Configuration needs
+
+### Cursor Rules
+- List relevant .cursor/rules files
+- Brief explanation of why each rule applies
+- How rules influence implementation
+
+## Workflow
+1. **Test First**
+   - Create/extend test file following testing-trigger.mdc rules
+   - Implement basic (failing) tests
+   - Get user approval via commit
+   
+2. **Implementation**
+   - Iterate on implementation until tests pass
+   - Follow task-specific guidelines
+   - Get user approval via commit
+   
+3. **Next Task**
+   - Only proceed after current task is fully tested and approved
+   - Each task builds on previous task's test file
+   - Implementation may be split into separate files as needed
+
+## Task Implementation Details
+
+### Task 1: {name}
+1. Test Implementation
+   - Key test cases
+   - Expected behavior
+   - Edge cases
+
+2. Implementation Steps
+   - Detailed steps
+   - Code examples
+   - Dependencies used
+
+### Task 2: {name}
+...
+
+## Output Schema
+```typescript
+// Define exact output type using Zod schemas
+const OutputSchema = z.object({
+  // schema definition
+});
+```
+
+## ✅ Success Criteria
+
+### Overall Success
+- All tasks implemented and tested
+- All tests passing
+- API matches overview example
+
+### Per Task Success
+1. Task 1
+   - Specific criteria
+   - Test coverage requirements
+   
+2. Task 2
+   ...
+
+## Implementation Notes
+- Technical considerations
+- Architecture decisions
+- Performance requirements
+- Security considerations
+
+## Next Steps
+1. Begin with Task 1 test implementation
+2. Get approval for tests
+3. Implement Task 1
+4. Get approval for implementation
+5. Proceed to next task
+```
+
+## Best Practices
+
+1. **Scope Control**
+   - If new requirements emerge, create new MVP
+   - Don't expand scope of current MVP
+   - Create follow-up tasks for improvements
+
+2. **Testing Focus**
+   - Tests should verify MVP requirements
+   - Include both happy and error paths
+   - Keep tests focused on MVP scope
+   - If we're building workflows with trigger.dev adhere to the [testing-trigger.mdc](mdc:.cursor/rules/testing-trigger.mdc) rule
+
+3. **References**
+   - Reference relevant .cursor/rules explicitly
+   - Document key decisions
+   - Keep implementation notes current
+
+4. **Challenge Requirements**
+   - Challenge requirements to agree on most barebones version
+   - Avoid scope creep
+   - Optimize for shipping

@@ -1,0 +1,109 @@
+---
+description: Instructions for how to test task implementations in the context of trigger.dev workflows
+globs: 
+alwaysApply: false
+---
+# Testing with Trigger.dev
+
+When implementing tasks that use Trigger.dev:
+
+1. All tests MUST be written in a single test file following the `@/lib/test` pattern
+2. Each task's tests should be added to this file before implementation
+3. The test file should follow this structure:
+
+```typescript
+import { type TestCase, createTestRunner, errorResultSchema, okResultSchema } from "@/lib/test";
+import { z } from "zod";
+
+// Define schemas used for validation
+const SomeTaskSchema = z.object({
+  // schema definition
+});
+
+// Test cases for each task
+const taskOneTestCases: TestCase<typeof taskOne>[] = [
+  {
+    name: "basicTest",
+    input: {
+      // test input
+    },
+    validate(result) {
+      const validation = okResultSchema.safeParse(result);
+      if (!validation.success) {
+        console.info(`Test '${this.name}' failed: ${JSON.stringify(result)}`);
+        return false;
+      }
+      
+      // Additional validation...
+      return true;
+    }
+  },
+  {
+    name: "errorTest",
+    input: {
+      // invalid input
+    },
+    validate(result) {
+      const validation = errorResultSchema.safeParse(result);
+      // Error validation...
+    }
+  }
+];
+
+// Export test runner for each task
+export const taskOneTest = createTestRunner({
+  id: "task_one_test",
+  task: taskOne,
+  testCases: taskOneTestCases
+});
+```
+
+## Implementation Workflow
+
+1. **Test First**
+   - Add new test cases to the single test file
+   - Create basic failing implementation
+   - Commit test file for approval
+   
+2. **Implementation**
+   - Implement task until tests pass
+   - Commit working implementation
+   - Get approval before moving to next task
+
+3. **Task Dependencies**
+   - Tests for dependent tasks must be in the same file
+   - Tests should run in logical order
+   - Each task's tests should be independent
+
+## Example Test Structure
+```typescript
+// tasks/my-feature/tests/index.ts
+
+// Import all tasks and schemas
+import { taskOne } from "../task-one";
+import { taskTwo } from "../task-two";
+import { TaskOneSchema, TaskTwoSchema } from "../schemas";
+
+// Test cases for Task One
+const taskOneTests: TestCase<typeof taskOne>[] = [/*...*/];
+
+// Test cases for Task Two
+const taskTwoTests: TestCase<typeof taskTwo>[] = [/*...*/];
+
+// Export all test runners
+export const taskOneTest = createTestRunner({/*...*/});
+export const taskTwoTest = createTestRunner({/*...*/});
+```
+
+## Test File Location
+- Tests should be in a `tests` directory next to the tasks
+- Single `index.ts` file containing all tests
+- Schemas can be in separate files but imported into test file
+
+## Test Approval Process
+1. Write tests for new task in the single test file
+2. Create minimal failing implementation
+3. Get approval via commit
+4. Implement until tests pass
+5. Get approval via commit
+6. Repeat for next task
